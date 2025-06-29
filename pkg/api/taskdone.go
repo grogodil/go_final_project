@@ -24,9 +24,9 @@ func TaskDoneHandler(w http.ResponseWriter, r *http.Request) {
 	task, err := db.GetTask(id)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			writeJSONError(w, "Task not found", http.StatusNotFound)
+			writeJSONError(w, "задача не найдена", http.StatusNotFound)
 		} else {
-			writeJSONError(w, "Database error", http.StatusInternalServerError)
+			writeJSONError(w, "ошибка БД", http.StatusInternalServerError)
 		}
 		return
 	}
@@ -36,19 +36,19 @@ func TaskDoneHandler(w http.ResponseWriter, r *http.Request) {
 	if task.Repeat == "" {
 		// Разовая задача - удаляем
 		if err := db.DeleteTask(id); err != nil {
-			writeJSONError(w, "Delete error", http.StatusInternalServerError)
+			writeJSONError(w, "ошибка при удалении задачи", http.StatusInternalServerError)
 			return
 		}
 	} else {
 		// Повторяющаяся задача - пересчитываем дату
 		next, err := NextDate(now, task.Date, task.Repeat)
 		if err != nil {
-			writeJSONError(w, "Invalid repeat rule", http.StatusBadRequest)
+			writeJSONError(w, "невозможное правило повторения", http.StatusBadRequest)
 			return
 		}
 
 		if err := db.UpdateDate(next, id); err != nil {
-			writeJSONError(w, "Update error", http.StatusInternalServerError)
+			writeJSONError(w, "ошибка обновления задачи", http.StatusInternalServerError)
 			return
 		}
 	}
