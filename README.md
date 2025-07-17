@@ -1,4 +1,4 @@
-# go_final_project
+# task_manager_project
 
 ## Файлы для итогового задания
 
