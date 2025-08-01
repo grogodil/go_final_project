@@ -1,6 +1,6 @@
 # task_manager_project
 
-## Файлы для итогового задания
+## Файлы
 
 1. В директории `tests` находятся тесты для проверки API, которое должно быть реализовано в веб-сервере: go test -run ^TestDB$ ./tests go test -run ^TestNextDate$ ./tests go test -run ^TestAddTask$ ./tests go test -run ^TestTasks$ ./tests go test -run ^TestEditTask$ ./tests go test -run ^TestDone$ ./tests go test -run ^TestDelTask$ ./tests Запуск всех тестов - go test ./tests
 
